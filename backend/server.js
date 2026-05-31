@@ -69,6 +69,15 @@ io.on("connection", (socket) => {
   });
 });
 
+console.log("Starting server...");
+dotenv.config();
+console.log("Env loaded");
+
+connectDB();
+console.log("DB function called");
+
+const app = express();
+console.log("Express created");
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,6 +1,6 @@
 
 import { RequestModel } from "../models/request.js";
-import { io } from "../server.js";
+// import { io } from "../server.js";
 
 
 // ================= CREATE REQUEST =================
@@ -14,10 +14,10 @@ export const createRequest = async (req, res) => {
         requester: req.user.id,
       });
 
-    io.emit(
-      "new-request",
-      request
-    );
+    // io.emit(
+    //   "new-request",
+    //   request
+    // );
 
     return res.status(201).json({
       success: true,
@@ -131,15 +131,15 @@ export const updateRequestStatus = async (
         }
       );
 
-    io.emit(
-      "request-status-updated",
-      {
-        requestId:
-          updatedRequest._id,
-        status:
-          updatedRequest.status,
-      }
-    );
+    // io.emit(
+    //   "request-status-updated",
+    //   {
+    //     requestId:
+    //       updatedRequest._id,
+    //     status:
+    //       updatedRequest.status,
+    //   }
+    // );
 
     return res.status(200).json({
       success: true,
@@ -237,15 +237,15 @@ export const respondToRequest =
 
       await request.save();
 
-      io.emit(
-        "request-response",
-        {
-          requestId:
-            request._id,
-          donorId:
-            req.user.id,
-        }
-      );
+      // io.emit(
+      //   "request-response",
+      //   {
+      //     requestId:
+      //       request._id,
+      //     donorId:
+      //       req.user.id,
+      //   }
+      // );
 
       return res.status(200).json({
         success: true,
