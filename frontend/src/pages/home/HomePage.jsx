@@ -1,4 +1,3 @@
-import Navbar from "../../components/layout/Navbar";
 import AnnouncementBar from "../../components/AnnouncementBar";
 
 import HeroSection from "../../components/home/HeroSection";
@@ -15,8 +14,6 @@ import Footer from "../../components/home/Footer";
 function HomePage() {
   return (
     <>
-      <Navbar />
-
       <AnnouncementBar />
 
       <HeroSection />

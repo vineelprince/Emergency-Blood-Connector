@@ -51,10 +51,10 @@ function DashboardLayout({ children }) {
         </div>
 
         {/* CONTENT */}
-        <div className="flex-1 min-h-screen">
+        <div className="flex-1 h-screen overflow-y-auto">
 
           {/* MOBILE DASHBOARD HEADER */}
-          <div className="lg:hidden bg-white border-b border-gray-100 p-4 flex justify-between items-center">
+          <div className="lg:hidden bg-white border-b border-gray-100 p-4 flex justify-between items-center sticky top-0 z-10">
 
             <h2 className="font-bold text-[#130a0c]">
               Dashboard
