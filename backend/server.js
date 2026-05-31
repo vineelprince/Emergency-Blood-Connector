@@ -20,23 +20,40 @@ dotenv.config();
 
 console.log("Starting Server...");
 
+// Database Connection
 connectDB();
 
 const app = express();
 const httpServer = createServer(app);
 
+// Allowed Origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://emergency-blood-connector-1.onrender.com",
+];
+
+// Socket.IO
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: allowedOrigins,
+    credentials: true,
   },
 });
 
 export { io };
 
-app.use(cors());
+// Middleware
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(morgan("dev"));
 
+// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/donors", donorRoutes);
@@ -46,34 +63,23 @@ app.use("/api/bloodbanks", bloodBankRoutes);
 app.use("/api/hospitals", hospitalRoutes);
 app.use("/api/emergency-alerts", emergencyAlertRoutes);
 
+// Health Check
 app.get("/", (req, res) => {
-  res.send("Emergency Blood Connector API Running...");
+  res.status(200).send("Emergency Blood Connector API Running...");
 });
 
+// Socket Connection
 io.on("connection", (socket) => {
-
-  console.log(
-    "User connected:",
-    socket.id
-  );
+  console.log("User connected:", socket.id);
 
   socket.on("disconnect", () => {
-
-    console.log(
-      "User disconnected:",
-      socket.id
-    );
-
+    console.log("User disconnected:", socket.id);
   });
-
 });
 
+// Start Server
 const PORT = process.env.PORT || 5000;
 
 httpServer.listen(PORT, () => {
-
-  console.log(
-    `Server running on port ${PORT}`
-  );
-
+  console.log(`Server running on port ${PORT}`);
 });
