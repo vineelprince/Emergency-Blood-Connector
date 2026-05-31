@@ -1,3 +1,6 @@
+import Navbar from "../../components/layout/Navbar";
+import AnnouncementBar from "../../components/AnnouncementBar";
+
 import HeroSection from "../../components/home/HeroSection";
 import BloodSearchSection from "../../components/home/BloodSearchSection";
 import StatsSection from "../../components/home/StatsSection";
@@ -6,36 +9,35 @@ import HowItWorks from "../../components/home/HowItWorks";
 import EmergencyFeed from "../../components/home/EmergencyFeed";
 import PartnerSection from "../../components/home/PartnerSection";
 import EmergencyCTA from "../../components/home/EmergencyCTA";
-import Footer from "../../components/home/Footer";
-// import LivePlatformStats from "../../components/home/LivePlatformStats";
 import FeaturedDonors from "../../components/home/FeaturedDonors";
+import Footer from "../../components/home/Footer";
 
 function HomePage() {
   return (
     <>
-      <>
-  <>
-  <HeroSection />
+      <Navbar />
 
-  <BloodSearchSection />
+      <AnnouncementBar />
 
-  <StatsSection />
+      <HeroSection />
 
-  <WhyChooseUs />
+      <BloodSearchSection />
 
-  <HowItWorks />
+      <StatsSection />
 
-  <FeaturedDonors />
+      <WhyChooseUs />
 
-  <EmergencyFeed />
+      <HowItWorks />
 
-  <PartnerSection />
+      <FeaturedDonors />
 
-  <EmergencyCTA />
+      <EmergencyFeed />
 
-  <Footer />
-</>
-</>
+      <PartnerSection />
+
+      <EmergencyCTA />
+
+      <Footer />
     </>
   );
 }
