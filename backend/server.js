@@ -6,6 +6,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 import connectDB from "./config/db.js";
+
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import donorRoutes from "./routes/donorRoutes.js";
@@ -15,8 +16,9 @@ import bloodBankRoutes from "./routes/bloodBankRoutes.js";
 import hospitalRoutes from "./routes/hospitalRoutes.js";
 import emergencyAlertRoutes from "./routes/emergencyAlertRoutes.js";
 
-
 dotenv.config();
+
+console.log("Starting Server...");
 
 connectDB();
 
@@ -28,14 +30,13 @@ const io = new Server(httpServer, {
     origin: "*",
   },
 });
+
 export { io };
 
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-
-// routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/donors", donorRoutes);
@@ -45,12 +46,9 @@ app.use("/api/bloodbanks", bloodBankRoutes);
 app.use("/api/hospitals", hospitalRoutes);
 app.use("/api/emergency-alerts", emergencyAlertRoutes);
 
-
-
 app.get("/", (req, res) => {
   res.send("Emergency Blood Connector API Running...");
 });
-
 
 io.on("connection", (socket) => {
 
@@ -67,17 +65,8 @@ io.on("connection", (socket) => {
     );
 
   });
+
 });
-
-console.log("Starting server...");
-dotenv.config();
-console.log("Env loaded");
-
-connectDB();
-console.log("DB function called");
-
-const app = express();
-console.log("Express created");
 
 const PORT = process.env.PORT || 5000;
 
