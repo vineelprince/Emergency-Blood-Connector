@@ -1,0 +1,168 @@
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Vineel",
+  "lastName": "Krishna",
+  "email": "vineel@gmail.com",
+  "password": "123456",
+  "phoneNumber": "9876543210",
+  "bloodGroup": "O+",
+  "location": "Hyderabad",
+  "role": "DONOR"
+}
+
+###
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Rohit",
+  "lastName": "Sharma",
+  "email": "rohit45@gmail.com",
+  "password": "123456",
+  "phoneNumber": "9876543211",
+  "bloodGroup": "A+",
+  "location": "Hyderabad",
+  "role": "DONOR"
+}
+
+
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "rohit45@gmail.com",
+  "password": "123456"
+}
+
+
+
+### PROTECTED PROFILE ROUTE
+
+GET http://localhost:5000/api/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+###
+GET http://localhost:5000/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+
+###
+PUT http://localhost:5000/api/users/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+Content-Type: application/json
+
+{
+  "location": "Bangalore",
+  "availability": false
+}
+
+###
+GET http://localhost:5000/api/donors
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+###
+GET http://localhost:5000/api/donors/search?bloodGroup=A+&location=Bangalore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+###
+PUT http://localhost:5000/api/users/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+Content-Type: application/json
+
+{
+  "availability": true
+}
+
+###
+GET http://localhost:5000/api/donors/search?bloodGroup=A+&location=Bangalore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+###
+GET http://localhost:5000/api/donors/search?bloodGroup=A%2B&location=Bangalore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+###
+GET http://localhost:5000/api/donors/search?bloodGroup=A%2B&location=Bangalore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+
+###
+POST http://localhost:5000/api/requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+Content-Type: application/json
+
+{
+  "patientName": "Ramesh",
+  "bloodGroup": "O+",
+  "unitsRequired": 2,
+  "hospitalName": "Apollo Hospital",
+  "hospitalAddress": "Hyderabad",
+  "contactNumber": "9876543210",
+  "urgency": "CRITICAL",
+  "additionalNotes": "Need blood within 2 hours"
+}
+
+
+###
+GET http://localhost:5000/api/requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+###
+GET http://localhost:5000/api/requests/my-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+
+
+###
+PUT http://localhost:5000/api/requests/6a0b5215da63b99be916d77f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+Content-Type: application/json
+
+{
+  "status": "ACCEPTED"
+}
+
+
+
+### CREATE HOSPITAL 1
+POST http://localhost:5000/api/hospitals
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw 
+Content-Type: application/json
+
+{
+  "name": "Apollo Hospital",
+  "location": "Hyderabad",
+  "contactNumber": "9876543210",
+  "supportedBloodGroups": [
+    "A+",
+    "B+",
+    "O+",
+    "AB+"
+  ]
+}
+
+### CREATE HOSPITAL 2
+POST http://localhost:5000/api/hospitals
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMGI0NTc1MGQ4YjM3OGUxMmI5ZDliMyIsInJvbGUiOiJET05PUiIsImlhdCI6MTc3OTEyMzk5OCwiZXhwIjoxNzc5NzI4Nzk4fQ.LYbz85n8AcgAZspdu96fcDsn-GlvO_ALmKECrlNBcnw
+Content-Type: application/json
+
+{
+  "name": "Yashoda Hospital",
+  "location": "Bangalore",
+  "contactNumber": "9876543211",
+  "supportedBloodGroups": [
+    "O-",
+    "A-",
+    "B-"
+  ]
+}
