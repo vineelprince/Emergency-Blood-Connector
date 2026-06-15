@@ -1,42 +1,62 @@
+// controllers/emergencyAlertController.js
 import { io } from "../server.js";
+import { EmergencyAlertModel } from "../models/emergencyAlert.js";
 
-export const broadcastEmergencyAlert =
-  async (req, res) => {
+// ================= BROADCAST EMERGENCY ALERT =================
 
-    try {
+export const broadcastEmergencyAlert = async (req, res) => {
+  try {
+    const { bloodGroup, location, hospital, urgency, message } = req.body;
 
-      const {
-        bloodGroup,
-        location,
-        hospital,
-        urgency,
-        message,
-      } = req.body;
+    // Save to DB
+    const alert = await EmergencyAlertModel.create({
+      bloodGroup,
+      location: location || "Unknown",
+      message: message || `Urgent: ${bloodGroup} blood required`,
+      requester: req.user.id,
+      status: "ACTIVE",
+    });
 
-      io.emit(
-        "emergency-alert",
-        {
-          bloodGroup,
-          location,
-          hospital,
-          urgency,
-          message,
-          createdAt: new Date(),
-        }
-      );
+    // Broadcast via socket
+    io.emit("emergency-alert", {
+      _id: alert._id,
+      bloodGroup,
+      location,
+      hospital,
+      urgency,
+      message,
+      createdAt: alert.createdAt,
+    });
 
-      return res.status(200).json({
-        success: true,
-        message:
-          "Emergency alert broadcasted",
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Emergency alert broadcasted",
+      alert,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 
-    } catch (error) {
+// ================= GET ALL ALERTS =================
 
-      return res.status(500).json({
-        success: false,
-        message: error.message,
-      });
+export const getAllAlerts = async (req, res) => {
+  try {
+    const alerts = await EmergencyAlertModel.find()
+      .populate("requester", "firstName lastName")
+      .sort({ createdAt: -1 });
 
-    }
-  };
+    return res.status(200).json({
+      success: true,
+      alerts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

@@ -18,42 +18,62 @@ import emergencyAlertRoutes from "./routes/emergencyAlertRoutes.js";
 
 dotenv.config();
 
-console.log("Starting Server...");
+console.log("Starting Emergency Blood Connector Server...");
 
-// Database Connection
 connectDB();
 
 const app = express();
 const httpServer = createServer(app);
 
-// Allowed Origins
 const allowedOrigins = [
   "http://localhost:5173",
+  "http://localhost:3000",
   "https://emergency-blood-connector-1.onrender.com",
+  "https://emergency-blood-connector.onrender.com",
 ];
 
-// Socket.IO
-const io = new Server(httpServer, {
-  cors: {
-    origin: allowedOrigins,
-    credentials: true,
-  },
-});
-
-export { io };
-
-// Middleware
 app.use(
   cors({
     origin: allowedOrigins,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-// API Routes
+const io = new Server(httpServer, {
+  cors: {
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST"],
+    allowEIO3: true,
+    transports: ['websocket', 'polling'],
+  },
+  allowUpgrades: true,
+  pingInterval: 25000,
+  pingTimeout: 20000,
+});
+
+export { io };
+
+io.on("connection", (socket) => {
+  console.log("Socket Connected:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("Socket Disconnected:", socket.id);
+  });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/donors", donorRoutes);
@@ -63,21 +83,29 @@ app.use("/api/bloodbanks", bloodBankRoutes);
 app.use("/api/hospitals", hospitalRoutes);
 app.use("/api/emergency-alerts", emergencyAlertRoutes);
 
-// Health Check
 app.get("/", (req, res) => {
-  res.status(200).send("Emergency Blood Connector API Running...");
-});
-
-// Socket Connection
-io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
-
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+  res.status(200).json({
+    success: true,
+    message: "Emergency Blood Connector API Running",
   });
 });
 
-// Start Server
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route Not Found: ${req.originalUrl}`,
+  });
+});
+
+app.use((err, req, res, next) => {
+  console.error("SERVER ERROR:", err);
+
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 httpServer.listen(PORT, () => {
