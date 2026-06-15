@@ -1,29 +1,14 @@
 import axios from "axios";
 
+const API_HOST =
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://emergency-blood-connector-backend-0bdo.onrender.com";
+
+// ensure no trailing slash and include /api prefix used by backend routes
+const API_BASE_URL = API_HOST.replace(/\/$/, "") + "/api";
+
 const axiosInstance = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_URL ||
-    "https://emergency-blood-connector.onrender.com/api",
-
-  withCredentials: true,
-
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: API_BASE_URL,
 });
-
-// Add token to every request
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
 
 export default axiosInstance;

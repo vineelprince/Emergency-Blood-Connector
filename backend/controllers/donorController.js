@@ -42,7 +42,7 @@ export const searchDonors = async (req, res) => {
     }
 
     if (location) {
-      query.location = {
+      query["location.address"] = {
         $regex: location,
         $options: "i",
       };

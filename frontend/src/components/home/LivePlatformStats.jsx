@@ -10,12 +10,6 @@ function LivePlatformStats() {
       requests: 0,
     });
 
-  useEffect(() => {
-
-    fetchStats();
-
-  }, []);
-
   const fetchStats =
     async () => {
 
@@ -49,6 +43,12 @@ function LivePlatformStats() {
         console.log(error);
       }
     };
+
+  useEffect(() => {
+
+    fetchStats();
+
+  }, []);
 
   return (
 

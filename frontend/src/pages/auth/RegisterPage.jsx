@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import "react-phone-input-2/lib/style.css";
 import LocationAutocomplete from "../../components/LocationAutocomplete";
 import axiosInstance from "../../api/axios";
+import toast from "react-hot-toast";
 
 function RegisterPage() {
 
@@ -60,28 +61,6 @@ function RegisterPage() {
       [e.target.name]: "",
     });
   };
-
-  // ================= PHONE CHANGE =================
-
-  const handlePhoneChange =
-    (value) => {
-
-      setFormData({
-        ...formData,
-
-        contact: {
-          ...formData.contact,
-
-          phoneNumber: value,
-        },
-      });
-
-      setErrors({
-        ...errors,
-
-        phoneNumber: "",
-      });
-    };
 
   // ================= LOCATION SELECT =================
 
@@ -228,9 +207,7 @@ function RegisterPage() {
 
       console.log(response.data);
 
-      alert(
-        "Registration successful"
-      );
+      toast.success("Registration successful");
 
       navigate("/login");
 
@@ -238,7 +215,7 @@ function RegisterPage() {
 
       console.log(error);
 
-      alert(
+      toast.error(
         error.response?.data
           ?.message ||
           "Something went wrong"

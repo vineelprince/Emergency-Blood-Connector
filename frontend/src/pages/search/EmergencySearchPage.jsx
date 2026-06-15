@@ -1,28 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import axiosInstance from "../../api/axios";
 import toast from "react-hot-toast";
 import Loader from "../../components/Loader";
 
 import EmptyState from "../../components/EmptyState";
-import {
-  FaTint,
-  FaHospital,
-  FaPhoneAlt,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
-
-import {
-  MdEmergency
-} from "react-icons/md";
-
-import {
-  IoLocationSharp
-} from "react-icons/io5";
-
-
 
 function EmergencySearchPage() {
+  const [searchParams] = useSearchParams();
+
   const [bloodGroup, setBloodGroup] =
     useState("");
 
@@ -43,6 +30,19 @@ function EmergencySearchPage() {
 
   const [hospitals, setHospitals] =
     useState([]);
+
+  useEffect(() => {
+    const bloodGroupParam = searchParams.get("bloodGroup");
+    const locationParam = searchParams.get("location");
+
+    if (bloodGroupParam) {
+      setBloodGroup(bloodGroupParam);
+    }
+
+    if (locationParam) {
+      setLocation(locationParam);
+    }
+  }, [searchParams]);
 
   // ================= SEARCH =================
 
@@ -103,7 +103,7 @@ function EmergencySearchPage() {
 
       console.log(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Search failed"
       );
@@ -135,7 +135,7 @@ const broadcastEmergencyAlert =
 
       const response =
         await axiosInstance.post(
-          "/emergency-alerts",
+          "/emergency-alerts/broadcast",
           {
             bloodGroup,
             location,
@@ -168,7 +168,7 @@ const broadcastEmergencyAlert =
 const getCurrentLocation = () => {
 
   if (!navigator.geolocation) {
-    alert(
+    toast.error(
       "Geolocation is not supported"
     );
 
@@ -198,7 +198,7 @@ const getCurrentLocation = () => {
 
       console.log(error);
 
-      alert(
+      toast.error(
         "Failed to get location"
       );
 

@@ -1,62 +1,82 @@
-// controllers/emergencyAlertController.js
 import { io } from "../server.js";
 import { EmergencyAlertModel } from "../models/emergencyAlert.js";
 
-// ================= BROADCAST EMERGENCY ALERT =================
+export const getEmergencyAlerts =
+  async (req, res) => {
 
-export const broadcastEmergencyAlert = async (req, res) => {
-  try {
-    const { bloodGroup, location, hospital, urgency, message } = req.body;
+    try {
 
-    // Save to DB
-    const alert = await EmergencyAlertModel.create({
-      bloodGroup,
-      location: location || "Unknown",
-      message: message || `Urgent: ${bloodGroup} blood required`,
-      requester: req.user.id,
-      status: "ACTIVE",
-    });
+      const alerts =
+        await EmergencyAlertModel.find()
+          .populate(
+            "requester",
+            "firstName lastName email"
+          )
+          .sort({ createdAt: -1 });
 
-    // Broadcast via socket
-    io.emit("emergency-alert", {
-      _id: alert._id,
-      bloodGroup,
-      location,
-      hospital,
-      urgency,
-      message,
-      createdAt: alert.createdAt,
-    });
+      return res.status(200).json({
+        success: true,
+        totalAlerts: alerts.length,
+        alerts,
+      });
 
-    return res.status(200).json({
-      success: true,
-      message: "Emergency alert broadcasted",
-      alert,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
+    } catch (error) {
 
-// ================= GET ALL ALERTS =================
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
 
-export const getAllAlerts = async (req, res) => {
-  try {
-    const alerts = await EmergencyAlertModel.find()
-      .populate("requester", "firstName lastName")
-      .sort({ createdAt: -1 });
+    }
+  };
 
-    return res.status(200).json({
-      success: true,
-      alerts,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
+export const broadcastEmergencyAlert =
+  async (req, res) => {
+
+    try {
+
+      const {
+        bloodGroup,
+        location,
+        message,
+      } = req.body;
+
+      const alert =
+        await EmergencyAlertModel.create({
+          bloodGroup,
+          location,
+          message,
+          requester: req.user.id,
+        });
+
+      await alert.populate(
+        "requester",
+        "firstName lastName email"
+      );
+
+      io.emit(
+        "emergency-alert",
+        alert
+      );
+
+      io.emit(
+        "newEmergencyAlert",
+        alert
+      );
+
+      return res.status(201).json({
+        success: true,
+        message:
+          "Emergency alert broadcasted",
+        alert,
+      });
+
+    } catch (error) {
+
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+
+    }
+  };

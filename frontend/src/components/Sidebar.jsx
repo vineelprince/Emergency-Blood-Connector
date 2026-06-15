@@ -16,10 +16,6 @@ function Sidebar({ closeSidebar }) {
   const [search, setSearch] =
     useState("");
 
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");

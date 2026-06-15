@@ -94,8 +94,7 @@ function Footer() {
               </div>
 
               <p className="text-gray-400 leading-relaxed">
-                Connecting blood donors, hospitals,
-                blood banks and emergency responders
+                Connecting blood donors, hospitals, blood banks and emergency responders
                 through one intelligent healthcare platform.
               </p>
 
@@ -118,10 +117,7 @@ function Footer() {
                   Home
                 </Link>
 
-                <Link
-                  to="/dashboard"
-                  className="block text-gray-400 hover:text-white"
-                >
+                <Link to="/dashboard" className="block text-gray-400 hover:text-white">
                   Dashboard
                 </Link>
 
@@ -178,28 +174,32 @@ function Footer() {
               <div className="flex gap-4">
 
                 <a
-                  href="#"
+                  href="https://www.facebook.com/"
+                  aria-label="Facebook"
                   className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-[#c1121f] transition"
                 >
                   <FaFacebookF />
                 </a>
 
                 <a
-                  href="#"
+                  href="https://www.instagram.com/"
+                  aria-label="Instagram"
                   className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-[#c1121f] transition"
                 >
                   <FaInstagram />
                 </a>
 
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/"
+                  aria-label="LinkedIn"
                   className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-[#c1121f] transition"
                 >
                   <FaLinkedinIn />
                 </a>
 
                 <a
-                  href="#"
+                  href="https://x.com/"
+                  aria-label="X"
                   className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-[#c1121f] transition"
                 >
                   <FaTwitter />
@@ -221,17 +221,17 @@ function Footer() {
 
             <div className="flex gap-6 mt-4 lg:mt-0 text-gray-500">
 
-              <a href="#">
+              <Link to="/login">
                 Privacy Policy
-              </a>
+              </Link>
 
-              <a href="#">
+              <Link to="/register">
                 Terms of Service
-              </a>
+              </Link>
 
-              <a href="#">
+              <Link to="/emergency-search">
                 Support
-              </a>
+              </Link>
 
             </div>
 

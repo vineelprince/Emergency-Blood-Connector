@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import axiosInstance from "../../api/axios";
+import toast from "react-hot-toast";
 
 function ProfilePage() {
 
@@ -218,7 +219,7 @@ function ProfilePage() {
           )
         );
 
-        alert(
+        toast.success(
           "Profile updated successfully"
         );
 
@@ -226,7 +227,7 @@ function ProfilePage() {
 
         console.log(error);
 
-        alert(
+        toast.error(
           error.response?.data
             ?.message ||
 

@@ -22,7 +22,7 @@ function FloatingEmergencyButtons() {
           onClick={() =>
             navigate("/emergency-alerts")
           }
-          className="bg-red-600 hover:bg-red-700 text-white px-5 py-4 rounded-full shadow-2xl font-semibold transition flex items-center gap-2"
+          className="bg-[#130a0c] hover:bg-black text-white px-5 py-4 rounded-full shadow-2xl font-semibold transition flex items-center gap-2"
         >
           🚨 Alerts
         </button>
@@ -32,7 +32,7 @@ function FloatingEmergencyButtons() {
           onClick={() =>
             setOpenSOS(true)
           }
-          className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-4 rounded-full shadow-2xl font-bold text-lg transition animate-pulse"
+          className="bg-[#c1121f] hover:bg-[#9b1528] text-white px-5 py-4 rounded-full shadow-2xl font-bold text-lg transition-all duration-300 animate-pulse"
         >
           🆘 SOS
         </button>

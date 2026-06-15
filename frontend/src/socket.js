@@ -1,15 +1,12 @@
 import { io } from "socket.io-client";
 
+const SOCKET_URL =
+  import.meta.env.VITE_SOCKET_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://emergency-blood-connector-backend-0bdo.onrender.com";
+
 const socket = io(
-  "https://emergency-blood-connector.onrender.com",
-  {
-    reconnection: true,
-    reconnectionDelay: 1000,
-    reconnectionDelayMax: 5000,
-    reconnectionAttempts: 5,
-    transports: ['websocket', 'polling'],
-    withCredentials: true,
-  }
+  SOCKET_URL
 );
 
 export default socket;

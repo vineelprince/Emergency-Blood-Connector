@@ -13,11 +13,7 @@ function EmergencyNotificationModal() {
   useEffect(() => {
 
     // Browser notification permission
-    if (
-      Notification.permission !==
-      "granted"
-    ) {
-
+    if (typeof Notification !== "undefined" && Notification.permission !== "granted") {
       Notification.requestPermission();
     }
 
@@ -27,10 +23,7 @@ function EmergencyNotificationModal() {
         setAlert(data);
 
         // Browser Notification
-        if (
-          Notification.permission ===
-          "granted"
-        ) {
+        if (typeof Notification !== "undefined" && Notification.permission === "granted") {
 
           new Notification(
             "Emergency Blood Alert",

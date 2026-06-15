@@ -37,6 +37,7 @@ function Navbar() {
 
           <Link
             to="/"
+            onClick={() => setMobileMenu(false)}
             className="flex items-center gap-3"
           >
             <div className="w-11 h-11 rounded-xl bg-[#c1121f] flex items-center justify-center text-white font-bold text-xl">
@@ -168,6 +169,7 @@ function Navbar() {
 
             <Link
               to="/"
+              onClick={() => setMobileMenu(false)}
               className="block"
             >
               Home
@@ -175,6 +177,7 @@ function Navbar() {
 
             <Link
               to="/emergency-search"
+              onClick={() => setMobileMenu(false)}
               className="block"
             >
               Find Blood
@@ -182,6 +185,7 @@ function Navbar() {
 
             <Link
               to="/hospitals"
+              onClick={() => setMobileMenu(false)}
               className="block"
             >
               Hospitals
@@ -189,6 +193,7 @@ function Navbar() {
 
             <Link
               to="/emergency-map"
+              onClick={() => setMobileMenu(false)}
               className="block"
             >
               Emergency Map
@@ -197,6 +202,7 @@ function Navbar() {
             {user && (
               <Link
                 to="/dashboard"
+                onClick={() => setMobileMenu(false)}
                 className="block"
               >
                 Dashboard

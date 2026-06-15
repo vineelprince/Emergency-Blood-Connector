@@ -1,13 +1,14 @@
 function AnnouncementBar() {
   return (
-    <div className="bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-gray-900 border-b border-amber-600 overflow-hidden">
+    <div className="bg-[#130a0c] text-white border-b border-white/10 overflow-hidden">
       <div className="py-3 whitespace-nowrap animate-[marquee_25s_linear_infinite]">
         <span className="mx-8 font-bold text-lg">
-          ⚙️ This project is under development
+          🩸 Emergency blood search, donor discovery, and hospital support in one place
         </span>
 
-        <span className="mx-8 font-bold text-lg">
-          🔔 Platform Update: Emergency Blood Connector is currently in Beta. Upcoming releases include AI-powered donor recommendations, real-time emergency alerts, hospital and blood bank integration, geolocation-based donor discovery, mobile applications, advanced analytics, and enhanced emergency response capabilities.
+        <span className="mx-8 font-semibold text-lg text-white/80">
+          Real-time alerts, accessibility-first UI, and faster response flows for
+          donors, seekers, and hospitals.
         </span>
       </div>
     </div>

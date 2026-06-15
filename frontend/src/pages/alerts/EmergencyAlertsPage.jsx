@@ -32,7 +32,7 @@ function EmergencyAlertsPage() {
           }
         );
 
-      setAlerts(response.data.alerts);
+      setAlerts(response.data.alerts || []);
 
     } catch (error) {
 
@@ -141,7 +141,7 @@ useEffect(() => {
                     📍 Location:
                     <span className="font-semibold">
                       {" "}
-                      {alert.location?.address}
+                      {alert.location?.address || alert.location}
                     </span>
                   </p>
 

@@ -5,6 +5,7 @@ import BloodSearchSection from "../../components/home/BloodSearchSection";
 import StatsSection from "../../components/home/StatsSection";
 import WhyChooseUs from "../../components/home/WhyChooseUs";
 import HowItWorks from "../../components/home/HowItWorks";
+import BloodKnowledgeSection from "../../components/home/BloodKnowledgeSection";
 import EmergencyFeed from "../../components/home/EmergencyFeed";
 import PartnerSection from "../../components/home/PartnerSection";
 import EmergencyCTA from "../../components/home/EmergencyCTA";
@@ -25,6 +26,8 @@ function HomePage() {
       <WhyChooseUs />
 
       <HowItWorks />
+
+      <BloodKnowledgeSection />
 
       <FeaturedDonors />
 

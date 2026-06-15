@@ -1,22 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function HeroSection() {
+  const navigate = useNavigate();
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [location, setLocation] = useState("");
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+
+    if (bloodGroup) params.set("bloodGroup", bloodGroup);
+    if (location.trim()) params.set("location", location.trim());
+
+    navigate(
+      params.toString()
+        ? `/emergency-search?${params.toString()}`
+        : "/emergency-search"
+    );
+  };
+
   return (
-    <section className="bg-[#faf8f8] overflow-hidden">
+    <section className="bg-[radial-gradient(circle_at_top_left,_rgba(193,18,31,0.12),_transparent_35%),linear-gradient(180deg,_#faf8f8_0%,_#fff_100%)] overflow-hidden">
 
-      <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28">
+      <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
 
           {/* LEFT CONTENT */}
 
           <div>
 
-            <div className="inline-flex items-center gap-2 bg-[#fff1f3] text-[#c1121f] px-4 py-2 rounded-full font-semibold text-sm mb-6">
-              ❤️ Emergency Blood Response Network
+            <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-red-100 text-[#c1121f] px-4 py-2 rounded-full font-semibold text-sm mb-6 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-[#c1121f] animate-pulse" />
+              Emergency Blood Response Network
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-extrabold text-[#130a0c] leading-tight">
+            <h1 className="text-5xl lg:text-7xl font-extrabold text-[#130a0c] leading-tight tracking-tight">
 
               Find Blood.
               <br />
@@ -28,19 +47,22 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl text-[#6e6268] mt-8 max-w-2xl leading-relaxed">
-              Connecting blood donors, hospitals, blood banks and
-              emergency responders through one intelligent healthcare
-              platform built to save lives faster.
+              Connecting verified donors, hospitals, and blood banks through one fast,
+              accessible platform built to shorten emergency response time.
             </p>
 
             {/* SEARCH BOX */}
 
-            <div className="mt-10 bg-white rounded-2xl shadow-lg border border-gray-100 p-4">
+            <div className="mt-10 matte-panel rounded-[28px] p-4">
 
               <div className="grid md:grid-cols-3 gap-3">
 
-                <select className="border border-gray-200 rounded-xl px-4 py-4 outline-none">
-                  <option>Select Blood Group</option>
+                <select
+                  value={bloodGroup}
+                  onChange={(e) => setBloodGroup(e.target.value)}
+                  className="border border-gray-200 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-[#c1121f]/20 bg-white/90"
+                >
+                  <option value="">Select Blood Group</option>
                   <option>A+</option>
                   <option>A-</option>
                   <option>B+</option>
@@ -54,15 +76,18 @@ function HeroSection() {
                 <input
                   type="text"
                   placeholder="Enter Location"
-                  className="border border-gray-200 rounded-xl px-4 py-4 outline-none"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="border border-gray-200 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-[#c1121f]/20 bg-white/90"
                 />
 
-                <Link
-                  to="/emergency-search"
-                  className="bg-[#c1121f] hover:bg-[#9b1528] text-white rounded-xl flex items-center justify-center font-semibold transition"
+                <button
+                  type="button"
+                  onClick={handleSearch}
+                  className="bg-[#c1121f] hover:bg-[#9b1528] text-white rounded-2xl flex items-center justify-center font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-[#c1121f]/20"
                 >
                   Search Blood
-                </Link>
+                </button>
 
               </div>
 
@@ -74,14 +99,14 @@ function HeroSection() {
 
               <Link
                 to="/register"
-                className="bg-[#c1121f] hover:bg-[#9b1528] text-white px-8 py-4 rounded-xl font-semibold transition"
+                className="bg-[#c1121f] hover:bg-[#9b1528] text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-[#c1121f]/20"
               >
                 Become a Donor
               </Link>
 
               <Link
                 to="/hospitals"
-                className="border border-gray-300 px-8 py-4 rounded-xl font-semibold text-[#130a0c]"
+                className="border border-gray-300 px-8 py-4 rounded-2xl font-semibold text-[#130a0c] bg-white/70 hover:bg-white transition-all duration-300 hover:-translate-y-0.5"
               >
                 Find Hospitals
               </Link>
@@ -90,9 +115,9 @@ function HeroSection() {
 
             {/* TRUST METRICS */}
 
-            <div className="grid grid-cols-3 gap-8 mt-14">
+            <div className="grid grid-cols-3 gap-4 sm:gap-8 mt-14">
 
-              <div>
+              <div className="rounded-2xl bg-white/70 border border-white/80 p-4 shadow-sm">
                 <h3 className="text-3xl font-bold text-[#c1121f]">
                   10K+
                 </h3>
@@ -102,7 +127,7 @@ function HeroSection() {
                 </p>
               </div>
 
-              <div>
+              <div className="rounded-2xl bg-white/70 border border-white/80 p-4 shadow-sm">
                 <h3 className="text-3xl font-bold text-[#c1121f]">
                   500+
                 </h3>
@@ -112,7 +137,7 @@ function HeroSection() {
                 </p>
               </div>
 
-              <div>
+              <div className="rounded-2xl bg-white/70 border border-white/80 p-4 shadow-sm">
                 <h3 className="text-3xl font-bold text-[#c1121f]">
                   50K+
                 </h3>
@@ -130,7 +155,7 @@ function HeroSection() {
 
           <div className="relative">
 
-            <div className="absolute -top-8 -left-8 bg-white shadow-xl rounded-2xl p-4 z-10">
+            <div className="absolute -top-6 left-0 lg:-left-6 bg-white/95 backdrop-blur shadow-xl rounded-3xl p-4 z-10 border border-white/70">
 
               <p className="text-sm text-gray-500">
                 Active Emergency Requests
@@ -142,13 +167,15 @@ function HeroSection() {
 
             </div>
 
-            <img
-              src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=1200&q=80"
-              alt="Blood Donation"
-              className="rounded-[32px] shadow-2xl w-full object-cover"
-            />
+            <div className="overflow-hidden rounded-[36px] shadow-2xl border border-white/70">
+              <img
+                src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=1200&q=80"
+                alt="Blood donation team"
+                className="w-full object-cover min-h-[520px]"
+              />
+            </div>
 
-            <div className="absolute -bottom-8 right-0 bg-white shadow-xl rounded-2xl p-5">
+            <div className="absolute -bottom-6 right-0 bg-white/95 backdrop-blur shadow-xl rounded-3xl p-5 border border-white/70">
 
               <p className="text-sm text-gray-500">
                 Available Donors
@@ -158,6 +185,15 @@ function HeroSection() {
                 4,521
               </h3>
 
+            </div>
+
+            <div className="absolute left-4 bottom-28 bg-[#130a0c]/90 text-white rounded-3xl px-5 py-4 max-w-xs shadow-2xl">
+              <p className="text-sm text-white/75">
+                Blood groups supported
+              </p>
+              <p className="font-semibold mt-1">
+                A+, A-, B+, B-, AB+, AB-, O+, O-
+              </p>
             </div>
 
           </div>

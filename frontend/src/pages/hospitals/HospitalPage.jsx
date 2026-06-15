@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import axiosInstance from "../../api/axios";
+import toast from "react-hot-toast";
 
 import Loader from "../../components/Loader";
 
@@ -51,7 +52,7 @@ function HospitalPage() {
 
       console.log(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to fetch hospitals"
       );

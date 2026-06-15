@@ -3,6 +3,7 @@ import Loader from "../../components/Loader";
 import EmptyState from "../../components/EmptyState";
 
 import axiosInstance from "../../api/axios";
+import toast from "react-hot-toast";
 
 function DonorSearchPage() {
   const [bloodGroup, setBloodGroup] =
@@ -42,7 +43,7 @@ function DonorSearchPage() {
     } catch (error) {
       console.log(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to fetch donors"
       );

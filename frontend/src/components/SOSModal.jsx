@@ -48,7 +48,7 @@ function SOSModal({
 
       const response =
         await axiosInstance.post(
-          "/emergency-alerts",
+        "/emergency-alerts/broadcast",
           {
             bloodGroup,
             location,

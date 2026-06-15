@@ -47,7 +47,7 @@ export const getBloodBanks = async (
 
     // filter by location
     if (location) {
-      filter.location = {
+      filter["location.address"] = {
         $regex: location,
         $options: "i",
       };

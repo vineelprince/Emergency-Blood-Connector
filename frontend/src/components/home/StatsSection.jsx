@@ -10,12 +10,21 @@ function StatsSection() {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
 
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[#c1121f] mb-3">
+            Platform snapshot
+          </p>
+          <h2 className="text-4xl font-bold mb-4">
+            Built to keep emergency response organized
+          </h2>
+        </div>
+
         <div className="grid md:grid-cols-4 gap-8">
 
           {stats.map((item) => (
             <div
               key={item.label}
-              className="bg-red-50 rounded-2xl p-8 text-center"
+              className="matte-panel rounded-[28px] p-8 text-center transition-all duration-300 hover:-translate-y-1"
             >
               <h2 className="text-5xl font-bold text-red-600">
                 {item.value}

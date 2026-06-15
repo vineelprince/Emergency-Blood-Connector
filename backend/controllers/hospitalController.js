@@ -50,7 +50,7 @@ export const getHospitals = async (
 
     // location filter
     if (location) {
-      filter.location = {
+      filter["location.address"] = {
         $regex: location,
         $options: "i",
       };
